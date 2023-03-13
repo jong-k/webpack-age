@@ -37,9 +37,7 @@ const SmoothieCard = ({ smoothie, onDelete }: PropType) => {
         <Link to={"/" + id}>
           <GoPencil className="icons" />
         </Link>
-        <Link to={"/" + id} onClick={handleDelete}>
-          <GoTrashcan className="icons" />
-        </Link>
+        <GoTrashcan className="icons" onClick={handleDelete} />
       </div>
     </div>
   );
