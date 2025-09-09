@@ -1,4 +1,5 @@
-// id 가 root인 div를 찾아서 그안에 h2 created by index.js 넣고 폰트 이탤릭으로 지정
+import { consoleText } from "./console.js";
+
 window.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("root");
   if (!root) return;
@@ -8,4 +9,5 @@ window.addEventListener("DOMContentLoaded", () => {
   h2.style.fontStyle = "italic";
 
   root.appendChild(h2);
+  consoleText("import한 모듈 호출해서 콘솔 찍어보기");
 });
