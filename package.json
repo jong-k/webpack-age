@@ -12,6 +12,8 @@
   "license": "ISC",
   "packageManager": "pnpm@10.15.1",
   "devDependencies": {
+    "@swc/core": "^1.13.5",
+    "swc-loader": "^0.2.6",
     "typescript": "^5.9.2",
     "webpack": "^5.101.3",
     "webpack-cli": "^6.0.1",
