@@ -1,4 +1,4 @@
-import { consoleText } from "./console.js";
+import { consoleText } from "./console";
 
 window.addEventListener("DOMContentLoaded", () => {
   const root = document.getElementById("root");
