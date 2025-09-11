@@ -4,6 +4,10 @@ const { PUBLIC } = require("./path");
 
 module.exports = merge(common, {
   devtool: "eval-cheap-module-source-map",
+  output: {
+    devtoolModuleFilenameTemplate: "webpack://[namespace]/[resource-path]",
+    devtoolNamespace: "webpack-age",
+  },
   devServer: {
     static: { directory: PUBLIC },
     port: 12345,
