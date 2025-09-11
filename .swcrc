@@ -3,5 +3,5 @@
     "target": "es2020",
     "parser": { "syntax": "typescript", "tsx": true }
   },
-  "sourceMaps": false
+  "sourceMaps": true
 }
