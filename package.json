@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "webpack serve --config ./webpack/webpack.dev.js --mode development",
     "build": "webpack --config ./webpack/webpack.prod.js --mode production",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "format": "prettier --write .",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
   },
   "keywords": [],
   "author": "jong-k",
@@ -18,10 +20,19 @@
     ]
   },
   "devDependencies": {
+    "@eslint/js": "^9.35.0",
     "@swc/core": "^1.13.5",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "eslint": "^9.35.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.4.0",
     "html-webpack-plugin": "^5.6.4",
+    "prettier": "^3.6.2",
     "swc-loader": "^0.2.6",
     "typescript": "^5.9.2",
+    "typescript-eslint": "^8.43.0",
     "webpack": "^5.101.3",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.2",

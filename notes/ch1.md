@@ -75,7 +75,7 @@ window.addEventListener("DOMContentLoaded", () => {
 - src/console.js
 
 ```js
-export const consoleText = (text) => console.log(text);
+export const consoleText = text => console.log(text);
 ```
 
 - src/index.js
@@ -195,4 +195,3 @@ pnpm build
   - webpack.config.js의 devtool 옵션을 생략하거나 false로 해둔다
 - development 환경에서 소스맵을 사용하고 싶다면 devtool="source-map" 을 설정한다
 - 각 설정별 번들 파일 비교: https://github.com/webpack/webpack/tree/main/examples/source-map
-
