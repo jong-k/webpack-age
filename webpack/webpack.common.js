@@ -4,7 +4,7 @@ const { ROOT, SRC, DIST, PUBLIC } = require("./path");
 
 module.exports = {
   context: ROOT, // 설정파일이 ./webpack/에 있어도 기준을 프로젝트 루트 경로로 고정
-  entry: path.join(SRC, "index.ts"),
+  entry: path.join(SRC, "main.tsx"),
   output: {
     path: DIST,
     filename: "bundle.js",
