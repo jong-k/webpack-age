@@ -10,6 +10,9 @@ module.exports = merge(common, {
         exclude: /(node_modules)/,
         use: {
           loader: "swc-loader",
+          options: {
+            jsc: { transform: { react: { development: false } } },
+          },
         },
       },
     ],
