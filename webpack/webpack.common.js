@@ -13,6 +13,9 @@ module.exports = {
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
   },
+  module: {
+    rules: [{ test: /\.css$/, use: ["style-loader", "css-loader"] }],
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(PUBLIC, "index.html"),
