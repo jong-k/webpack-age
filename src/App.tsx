@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import fieldImg from "./assets/images/field.jpg";
 import { consoleText } from "./console";
 
 export default function App() {
@@ -8,7 +9,8 @@ export default function App() {
 
   return (
     <div>
-      <h2 style={{ fontStyle: "italic" }}>created by App.tsx</h2>
+      <h2 className="italic text-2xl">앱 전역에 프리텐다드 글꼴 잘 적용되었는지 확인하기</h2>
+      <img src={fieldImg} alt="field" />
     </div>
   );
 }

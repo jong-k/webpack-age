@@ -7,15 +7,31 @@ module.exports = {
   entry: path.join(SRC, "main.tsx"),
   output: {
     path: DIST,
-    filename: "bundle.js",
+    filename: "assets/[name].js",
     clean: true,
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
   },
+  module: {
+    rules: [
+      {
+        test: /\.(woff2?|ttf|otf|eot)$/i,
+        type: "asset/resource",
+        generator: { filename: "assets/fonts/[name][ext]" },
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg|webp)$/i,
+        exclude: [path.join(PUBLIC, "favicons")],
+        type: "asset/resource",
+        generator: { filename: "assets/images/[name][ext]" },
+      },
+    ],
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(PUBLIC, "index.html"),
+      favicon: path.join(PUBLIC, "favicons/favicon-32x32.png"),
     }),
   ],
 };
