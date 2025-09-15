@@ -1,6 +1,6 @@
 import { useEffect } from "react";
+import fieldImg from "./assets/images/field.jpg";
 import { consoleText } from "./console";
-import fieldImg from "../public/images/field.jpg";
 
 export default function App() {
   useEffect(() => {
