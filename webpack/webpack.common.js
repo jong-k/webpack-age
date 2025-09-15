@@ -20,12 +20,18 @@ module.exports = {
         type: "asset/resource",
         generator: { filename: "assets/fonts/[name][ext]" },
       },
+      {
+        test: /\.(png|jpe?g|gif|svg|webp)$/i,
+        exclude: [path.join(PUBLIC, "favicons")],
+        type: "asset/resource",
+        generator: { filename: "assets/images/[name][ext]" },
+      },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(PUBLIC, "index.html"),
-      favicon: path.join(PUBLIC, "images/favicon-32x32.png"),
+      favicon: path.join(PUBLIC, "favicons/favicon-32x32.png"),
     }),
   ],
 };
