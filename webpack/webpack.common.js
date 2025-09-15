@@ -7,19 +7,11 @@ module.exports = {
   entry: path.join(SRC, "main.tsx"),
   output: {
     path: DIST,
-    filename: "bundle.js",
+    filename: "assets/[name].js",
     clean: true,
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
-  },
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: ["style-loader", { loader: "css-loader", options: { importLoaders: 1 } }, "postcss-loader"],
-      },
-    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
