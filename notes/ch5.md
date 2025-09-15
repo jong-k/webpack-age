@@ -204,7 +204,11 @@ module.exports = merge(common, {
 
 ### 폰트 파일 추가하기
 
-이제 폰트 파일을 앱에 추가해본다. pretendard .woff2 폰트파일을 public/fonts 에 추가하고, webpack config에서 .woff2 파일을 index.html에 포함하게 한다.
+이제 폰트 파일을 앱에 추가해본다. pretendard .woff2 폰트파일을 src/assets/fonts 에 추가하고, CSS에서 .woff2 파일을 상대경로로 import하여 Webpack이 번들에 포함하게 한다.
+
+- 폰트 파일을 /public 대신 src/assets 에 보관하는 이유
+  - /public 폴더는 Webpack에 포함하지 않고 절대경로로 서빙하기 위한 파일의 위치이다
+  - 폰트 파일은 Webpack을 거쳐 번들에 포함되어야 하기 때문에 /src 내에 위치해야 한다
 
 폰트의 경우, 용량이 매우 크기 때문에, 애셋 모듈을 `asset/resource`로 설정한다
 
@@ -243,7 +247,7 @@ module.exports = {
   font-weight: 45 920;
   font-style: normal;
   font-display: swap;
-  src: url("/public/fonts/PretendardVariable.woff2") format("woff2-variations");
+  src: url("./assets/fonts/PretendardVariable.woff2") format("woff2-variations");
 }
 
 html {
