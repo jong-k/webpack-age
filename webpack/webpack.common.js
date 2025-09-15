@@ -13,6 +13,15 @@ module.exports = {
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
   },
+  module: {
+    rules: [
+      {
+        test: /\.(woff2?|ttf|otf|eot)$/i,
+        type: "asset/resource",
+        generator: { filename: "assets/fonts/[name][ext]" },
+      },
+    ],
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(PUBLIC, "index.html"),
