@@ -8,7 +8,7 @@ export default function App() {
 
   return (
     <div>
-      <h2 style={{ fontStyle: "italic" }}>created by App.tsx</h2>
+      <h2 className="italic">created by App.tsx</h2>
     </div>
   );
 }
