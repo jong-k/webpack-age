@@ -2,7 +2,6 @@
   "jsc": {
     "target": "es2020",
     "parser": { "syntax": "typescript", "tsx": true },
-    // JSX 트랜스폼 방식을 automatic runtime으로 구성하여 매번 파일 상단에 React import할 필요가 없어지고 트리셰이킹, 번들 크기 최적화 지원
     "transform": { "react": { "runtime": "automatic" } }
   },
   "sourceMaps": true
