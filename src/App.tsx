@@ -1,4 +1,5 @@
 import fieldImg from "./assets/images/field.jpg";
+import TicketModal from "./features/ticket/TicketModal";
 
 export default function App() {
   return (
@@ -11,7 +12,9 @@ export default function App() {
           backgroundPosition: "top",
           backgroundRepeat: "no-repeat",
         }}
-      ></div>
+      >
+        <TicketModal />
+      </div>
     </div>
   );
 }
