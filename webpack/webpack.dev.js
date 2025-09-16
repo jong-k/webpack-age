@@ -1,6 +1,7 @@
 const { merge } = require("webpack-merge");
 const common = require("./webpack.common");
 const { PUBLIC } = require("./path");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 module.exports = merge(common, {
   devtool: "eval-cheap-module-source-map",
@@ -13,6 +14,7 @@ module.exports = merge(common, {
     port: 12345,
     open: true,
     historyApiFallback: true,
+    hot: true,
   },
   module: {
     rules: [
@@ -24,7 +26,7 @@ module.exports = merge(common, {
           options: {
             jsc: {
               transform: {
-                react: { development: true },
+                react: { development: true, refresh: true },
               },
             },
           },
@@ -36,4 +38,5 @@ module.exports = merge(common, {
       },
     ],
   },
+  plugins: [new ReactRefreshWebpackPlugin()],
 });
