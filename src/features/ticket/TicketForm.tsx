@@ -5,14 +5,25 @@ export default function TicketForm() {
   const arrivalDateRef = useRef<HTMLInputElement | null>(null);
 
   const handleClick = () => {
-    if (!departureDateRef.current?.value || !arrivalDateRef.current?.value) return;
-    console.log(departureDateRef.current?.value);
-    console.log(arrivalDateRef.current?.value);
+    if (!departureDateRef.current?.value || !arrivalDateRef.current?.value) {
+      window.alert("날짜를 입력해주세요");
+      return;
+    }
+    const departureDate = new Date(departureDateRef.current?.value);
+    const arrivalDate = new Date(arrivalDateRef.current?.value);
+
+    if (departureDate > arrivalDate) {
+      window.alert("오는 날짜는 가는 날짜보다 빠를 수 없습니다");
+      return;
+    }
+
+    console.log(departureDate);
+    console.log(arrivalDate);
   };
 
   return (
     <div className="w-full">
-      <form className="flex flex-col items-center gap-8">
+      <form className="flex flex-col items-center gap-10">
         <h2 className="text-2xl font-semibold">✈️ 여행을 떠나요 ✈️</h2>
         <div className="flex flex-col gap-1">
           <label className="text-sm" htmlFor="departure">
@@ -26,15 +37,18 @@ export default function TicketForm() {
           </label>
           <input ref={arrivalDateRef} className="text-xl" type="date" name="arrival" id="arrival" />
         </div>
-        <div className="flex w-1/2 items-center justify-between bg-amber-200">
+        <div className="flex w-full items-center justify-center gap-8 font-semibold">
           <button
             onClick={handleClick}
             type="button"
-            className="w-[6rem] cursor-pointer rounded-md bg-green-300 py-2 hover:bg-green-200"
+            className="w-[6rem] cursor-pointer rounded-md bg-green-300 py-2 shadow-md hover:bg-green-200"
           >
             티켓 생성
           </button>
-          <button type="reset" className="w-[6rem] cursor-pointer rounded-md bg-red-300 py-2 hover:bg-red-200">
+          <button
+            type="reset"
+            className="w-[6rem] cursor-pointer rounded-md bg-red-300 py-2 shadow-md hover:bg-red-200"
+          >
             초기화
           </button>
         </div>
