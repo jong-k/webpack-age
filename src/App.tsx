@@ -2,15 +2,16 @@ import fieldImg from "./assets/images/field.jpg";
 
 export default function App() {
   return (
-    <div
-      style={{
-        backgroundImage: `url(${fieldImg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "top",
-        backgroundRepeat: "no-repeat",
-        width: "100%",
-        minHeight: "100dvh",
-      }}
-    ></div>
+    <div className="w-full overflow-x-hidden">
+      <div
+        className="min-h-dvh w-full min-w-xs"
+        style={{
+          backgroundImage: `url(${fieldImg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "top",
+          backgroundRepeat: "no-repeat",
+        }}
+      ></div>
+    </div>
   );
 }
