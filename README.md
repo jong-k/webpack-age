@@ -9,6 +9,7 @@
 - [Webpack으로 dev server 띄우고 용도별 분할 및 편의 기능 추가하기](https://github.com/jong-k/webpack-age/tree/main/notes/ch3.md)
 - [React 개발환경 직접 세팅하기](https://github.com/jong-k/webpack-age/tree/main/notes/ch4.md)
 - [CSS, 정적 파일(폰트, 아이콘, 이미지)를 번들에 포함하기](https://github.com/jong-k/webpack-age/tree/main/notes/ch5.md)
+- [HMR(Hot Module Replacement) 적용하기](https://github.com/jong-k/webpack-age/tree/main/notes/ch6.md)
 
 ## 기타
 
