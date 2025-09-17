@@ -1,11 +1,7 @@
 import { useState } from "react";
 import TicketForm from "./TicketForm";
 import TicketModal from "./TicketModal";
-
-export interface TicketDate {
-  departure: Date | null;
-  arrival: Date | null;
-}
+import type { TicketDate } from "../../entities/ticket/model";
 
 export default function TicketContainer() {
   const [ticketDate, setTicketDate] = useState<TicketDate>({

@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
-import type { TicketDate } from "./TicketContainer";
 import barcodeImg from "../../assets/images/barcode.png";
+import type { TicketDate } from "../../entities/ticket/model";
 
 interface BoardingPassProps {
   ticketDate: TicketDate;

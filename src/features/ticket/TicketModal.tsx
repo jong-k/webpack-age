@@ -1,5 +1,5 @@
 import BoardingPass from "./BoardingPass";
-import type { TicketDate } from "./TicketContainer";
+import type { TicketDate } from "../../entities/ticket/model";
 import { Modal } from "../../shared/ui";
 
 interface TicketModalProps {

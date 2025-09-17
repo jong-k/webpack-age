@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import type { TicketDate } from "./TicketContainer";
+import type { TicketDate } from "../../entities/ticket/model";
 
 interface TicketFormProps {
   openModal: () => void;
