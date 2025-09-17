@@ -14,7 +14,7 @@ export default function TicketContainer() {
   });
   const getTicketDate = (date: TicketDate) => setTicketDate(date);
 
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
