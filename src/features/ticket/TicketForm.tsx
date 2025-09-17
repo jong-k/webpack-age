@@ -1,6 +1,12 @@
 import { useRef } from "react";
+import type { TicketDate } from "./TicketContainer";
 
-export default function TicketForm() {
+interface TicketFormProps {
+  openModal: () => void;
+  getTicketDate: (date: TicketDate) => void;
+}
+
+export default function TicketForm({ openModal, getTicketDate }: TicketFormProps) {
   const departureDateRef = useRef<HTMLInputElement | null>(null);
   const arrivalDateRef = useRef<HTMLInputElement | null>(null);
 
@@ -17,8 +23,11 @@ export default function TicketForm() {
       return;
     }
 
-    console.log(departureDate);
-    console.log(arrivalDate);
+    getTicketDate({
+      departure: departureDate,
+      arrival: arrivalDate,
+    });
+    openModal();
   };
 
   return (
