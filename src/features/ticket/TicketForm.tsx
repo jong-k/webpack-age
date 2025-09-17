@@ -3,10 +3,10 @@ import type { TicketDate } from "./TicketContainer";
 
 interface TicketFormProps {
   openModal: () => void;
-  getTicketDate: (date: TicketDate) => void;
+  ticketDateSetter: (date: TicketDate) => void;
 }
 
-export default function TicketForm({ openModal, getTicketDate }: TicketFormProps) {
+export default function TicketForm({ openModal, ticketDateSetter }: TicketFormProps) {
   const departureDateRef = useRef<HTMLInputElement | null>(null);
   const arrivalDateRef = useRef<HTMLInputElement | null>(null);
 
@@ -23,7 +23,7 @@ export default function TicketForm({ openModal, getTicketDate }: TicketFormProps
       return;
     }
 
-    getTicketDate({
+    ticketDateSetter({
       departure: departureDate,
       arrival: arrivalDate,
     });
