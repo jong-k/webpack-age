@@ -20,7 +20,8 @@ const ARRIVAL_TIME = `${faker.date.anytime().toTimeString().slice(0, 5)}`;
 const PASSENGER = faker.person.fullName();
 
 export default function BoardingPass({ ticketDate }: BoardingPassProps) {
-  const arrivalDate = ticketDate.arrival?.toDateString();
+  const departureDate = ticketDate.departure?.toDateString();
+
   return (
     <div className="w-full shadow-lg">
       <div className="grid w-full grid-cols-3 rounded-t-xl bg-blue-900 text-xl font-semibold text-white">
@@ -42,7 +43,7 @@ export default function BoardingPass({ ticketDate }: BoardingPassProps) {
                 </div>
                 <div className="flex-1">
                   <div className="text-center text-sm italic">Date</div>
-                  <div className="font-semibold">{arrivalDate}</div>
+                  <div className="font-semibold">{departureDate}</div>
                 </div>
                 <div className="flex-1">
                   <div className="text-center text-sm italic">Departure Time</div>
