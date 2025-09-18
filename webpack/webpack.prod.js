@@ -22,7 +22,8 @@ module.exports = merge(common, {
         },
       },
     },
-    minimizer: [new CssMinimizerPlugin()],
+    // Keep default JS minimizer and add CSS minimizer
+    minimizer: ["...", new CssMinimizerPlugin()],
   },
   plugins: [
     new MiniCssExtractPlugin({
