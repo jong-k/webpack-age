@@ -4,9 +4,28 @@ const common = require("./webpack.common");
 
 module.exports = merge(common, {
   devtool: "nosources-source-map", // 맵 배포 + 소스 미포함
+  output: {
+    filename: "assets/[name].[contenthash].js",
+    chunkFilename: "assets/[name].[contenthash].js",
+  },
+  optimization: {
+    runtimeChunk: "single",
+    moduleIds: "deterministic",
+    splitChunks: {
+      chunks: "all",
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendors",
+          chunks: "all",
+        },
+      },
+    },
+  },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "assets/[name].css",
+      filename: "assets/[name].[contenthash].css",
+      chunkFilename: "assets/[name].[contenthash].css",
     }),
   ],
   module: {
