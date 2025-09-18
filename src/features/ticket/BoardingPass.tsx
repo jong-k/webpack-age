@@ -1,31 +1,37 @@
-import { faker } from "@faker-js/faker";
+import { useEffect, useState } from "react";
+import { loadTicketData } from "./lib/ticketData";
+import { TICKET_PLACEHOLDER } from "./lib/ticketData";
 import barcodeImg from "../../assets/images/barcode.png";
-import type { TicketDate } from "../../entities/ticket/model";
+import type { TicketDate, TicketRuntimeData } from "../../entities/ticket/model";
 
 interface BoardingPassProps {
   ticketDate: TicketDate;
 }
 
-const AIRLINE = faker.airline.airline();
-const AIRLINE_NAME = AIRLINE.name;
-const FLIGHT_NUMBER = `${AIRLINE.iataCode}${faker.airline.flightNumber({ addLeadingZeros: true })}`;
-const DEPARTURE_AIRPORT = faker.airline.airport();
-const ARRIVAL_AIRPORT = faker.airline.airport();
-const PASS_ID = faker.airline.recordLocator({ allowNumerics: true, allowVisuallySimilarCharacters: true });
-const SEAT_NUMBER = faker.airline.seat();
-
-const DEPARTURE_TIME = `${faker.date.anytime().toTimeString().slice(0, 5)}`;
-const ARRIVAL_TIME = `${faker.date.anytime().toTimeString().slice(0, 5)}`;
-
-const PASSENGER = faker.person.fullName();
+const PROD_PLACEHOLDER = process.env.NODE_ENV === "production" ? TICKET_PLACEHOLDER : null;
 
 export default function BoardingPass({ ticketDate }: BoardingPassProps) {
+  const [ticketData, setTicketData] = useState<TicketRuntimeData | null>(PROD_PLACEHOLDER);
   const departureDate = ticketDate.departure?.toDateString();
+
+  useEffect(() => {
+    if (process.env.NODE_ENV === "production") return;
+    let active = true;
+    loadTicketData().then(d => {
+      if (active) setTicketData(d);
+    });
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  if (!ticketData) return null;
 
   return (
     <div className="w-full shadow-lg">
       <div className="grid w-full grid-cols-3 rounded-t-xl bg-blue-900 text-xl font-semibold text-white">
-        <div className="col-span-2 py-2 pl-4">{AIRLINE_NAME}</div>
+        <div className="col-span-2 py-2 pl-4">{ticketData.airlineName}</div>
         <div className="col-span-1 border-l-2 border-dashed py-2 text-center">BOARDING PASS</div>
       </div>
       <div className="grid w-full grid-cols-3 rounded-b-lg">
@@ -33,13 +39,13 @@ export default function BoardingPass({ ticketDate }: BoardingPassProps) {
           <div className="col-span-2 flex flex-col gap-4">
             <div>
               <div className="text-sm italic">From</div>
-              <div className="font-semibold">{DEPARTURE_AIRPORT.name}</div>
+              <div className="font-semibold">{ticketData.departureAirportName}</div>
             </div>
             <div className="flex flex-col gap-4">
               <div className="flex">
                 <div className="flex-1">
                   <div className="text-center text-sm italic">Flight</div>
-                  <div className="font-semibold">{FLIGHT_NUMBER}</div>
+                  <div className="font-semibold">{ticketData.flightNumber}</div>
                 </div>
                 <div className="flex-1">
                   <div className="text-center text-sm italic">Date</div>
@@ -47,7 +53,7 @@ export default function BoardingPass({ ticketDate }: BoardingPassProps) {
                 </div>
                 <div className="flex-1">
                   <div className="text-center text-sm italic">Departure Time</div>
-                  <div className="font-semibold">{DEPARTURE_TIME}</div>
+                  <div className="font-semibold">{ticketData.departureTime}</div>
                 </div>
               </div>
               <div className="flex">
@@ -57,11 +63,11 @@ export default function BoardingPass({ ticketDate }: BoardingPassProps) {
                 </div>
                 <div className="flex-1">
                   <div className="text-center text-sm italic">Boarding Till</div>
-                  <div className="font-semibold">{DEPARTURE_TIME}</div>
+                  <div className="font-semibold">{ticketData.departureTime}</div>
                 </div>
                 <div className="flex-1">
                   <div className="text-center text-sm italic">Seat</div>
-                  <div className="font-semibold">{SEAT_NUMBER}</div>
+                  <div className="font-semibold">{ticketData.seatNumber}</div>
                 </div>
               </div>
             </div>
@@ -69,11 +75,11 @@ export default function BoardingPass({ ticketDate }: BoardingPassProps) {
           <div className="col-span-1 flex flex-col gap-4">
             <div>
               <div className="text-sm italic">To</div>
-              <div className="font-semibold">{ARRIVAL_AIRPORT.name}</div>
+              <div className="font-semibold">{ticketData.arrivalAirportName}</div>
             </div>
             <div>
               <div className="text-sm italic">Arrival Time</div>
-              <div className="font-semibold">{ARRIVAL_TIME}</div>
+              <div className="font-semibold">{ticketData.arrivalTime}</div>
             </div>
             <div>
               <div className="text-sm italic">Terminal</div>
@@ -84,7 +90,7 @@ export default function BoardingPass({ ticketDate }: BoardingPassProps) {
         <div className="col-span-1 border-l-2 border-dashed p-4">
           <div className="pl-2">
             <div className="text-sm italic">Passenger</div>
-            <div className="font-semibold">{PASSENGER}</div>
+            <div className="font-semibold">{ticketData.passenger}</div>
           </div>
           <div>
             <img className="w-full" src={barcodeImg} alt="barcode" />
@@ -93,10 +99,10 @@ export default function BoardingPass({ ticketDate }: BoardingPassProps) {
       </div>
       <div className="grid w-full grid-cols-3 rounded-b-lg bg-blue-900 font-mono text-sm text-white">
         <div className="col-span-2 grid grid-cols-5 py-2 pl-4">
-          <div className="col-span-1">{PASS_ID}</div>
+          <div className="col-span-1">{ticketData.passId}</div>
           <div className="col-span-4 text-center">PLEASE BE AT THE BOARDING TIME</div>
         </div>
-        <div className="col-span-1 border-l-2 border-dashed py-2 text-center">{PASS_ID}</div>
+        <div className="col-span-1 border-l-2 border-dashed py-2 text-center">{ticketData.passId}</div>
       </div>
     </div>
   );
