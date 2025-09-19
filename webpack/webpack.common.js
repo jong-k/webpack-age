@@ -18,13 +18,13 @@ module.exports = {
       {
         test: /\.(woff2?|ttf|otf|eot)$/i,
         type: "asset/resource",
-        generator: { filename: "assets/fonts/[name][ext]" },
+        generator: { filename: "assets/fonts/[name].[contenthash][ext]" },
       },
       {
         test: /\.(png|jpe?g|gif|svg|webp)$/i,
         exclude: [path.join(PUBLIC, "favicons")],
         type: "asset/resource",
-        generator: { filename: "assets/images/[name][ext]" },
+        generator: { filename: "assets/images/[name].[contenthash][ext]" },
       },
     ],
   },
