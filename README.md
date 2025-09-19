@@ -2,7 +2,93 @@
 
 > Webpack Easy!
 
-## 목차
+프로덕션 수준 번들링 학습을 목적으로, Webpack 기반으로 React 애플리케이션을 직접 구성한 프로젝트입니다. 개발, 빌드 파이프라인, 정적 애셋 처리, HMR/React Refresh를 적용해봤습니다.
+
+## 기술 스택
+
+- 언어/런타임: TypeScript, Node.js, pnpm(패키지 매니저)
+- UI: React
+- 스타일: Tailwind CSS v4
+- 번들러: Webpack 5
+  - 트랜스파일러: SWC
+  - 개발 서버: Webpack Dev Server
+
+## 폴더 구조
+
+- FSD 패턴 적용 (Feature-Sliced Design): `features/`, `entities/`, `shared/`로 역할 분리
+
+```text
+├─ public/                 # 정적 템플릿/파비콘
+│  ├─ index.html
+│  └─ favicons/
+├─ src/                    # 애플리케이션 코드
+│  ├─ main.tsx             # 엔트리 파일
+│  ├─ App.tsx              # 루트 컴포넌트
+│  ├─ index.css            # Tailwind CSS 로드, 폰트 적용
+│  ├─ assets/
+│  │  ├─ fonts/
+│  │  └─ images/
+│  ├─ features/
+│  │  └─ ticket/           # 티켓 생성 도메인
+│  │     ├─ TicketContainer.tsx
+│  │     ├─ TicketForm.tsx
+│  │     ├─ TicketModal.tsx
+│  │     ├─ BoardingPass.tsx
+│  │     └─ lib/ticketData.ts
+│  ├─ entities/
+│  │  └─ ticket/model/     # 엔터티 타입과 배럴
+│  └─ shared/ui/           # 재사용 UI(Modal 등)
+├─ webpack/                # 환경별 번들 설정
+│  ├─ webpack.common.js
+│  ├─ webpack.dev.js
+│  └─ webpack.prod.js
+├─ dist/                   # 빌드 산출물 (빌드 시 생성)
+└─ 기타 설정               # eslint, prettier, tsconfig, postcss 등
+```
+
+## 티켓 생성 서비스 소개
+
+- 출발/도착 날짜를 입력하면 가상의 항공권을 생성합니다.
+- 더미 데이터: 개발 환경에서는 `@faker-js/faker`로 항공사/공항/좌석/시간/승객명을 실시간 생성합니다.
+  - 프로덕션 환경에서는 `TICKET_PLACEHOLDER` 문자열 더미 데이터를 사용합니다. (무거운 `@faker-js/faker`라이브러리를 번들에 포함하지 않기 위해)
+- 반응형 디자인 적용
+
+## Webpack 구현 내용
+
+- 엔트리/출력
+  - 엔트리: `src/main.tsx`
+  - 출력: 개발 `assets/[name].js`, 프로덕션 `assets/[name].[contenthash].js`
+- 로더/플러그인
+  - JS/TS: `swc-loader`로 React 자동 런타임, Dev는 Refresh 활성화
+  - CSS: Dev `style-loader + css-loader(importLoaders=1) + postcss-loader` / Prod `mini-css-extract-plugin`
+  - 에셋: 폰트/이미지 `asset/resource` 처리, 파비콘 경로(`public/favicons`)는 이미지 처리에서 제외
+  - HTML: `HtmlWebpackPlugin`으로 `public/index.html` 템플릿 + 파비콘 주입
+- 개발 환경(`webpack.dev.js`)
+  - `devtool: eval-cheap-module-source-map`
+  - DevServer: `static.directory = public/`, `port = 12345`, `open = true`, `hot = true`, `historyApiFallback = true`
+  - React Refresh: `@pmmmwh/react-refresh-webpack-plugin`
+- 프로덕션 환경(`webpack.prod.js`)
+  - `devtool: nosources-source-map`(소스 미포함 맵)
+  - 코드 스플리팅: `splitChunks` + `runtimeChunk: single` + `moduleIds: deterministic`
+  - 최적화: 기본 Terser 유지 + `CssMinimizerPlugin`
+
+## 빠른 시작
+
+사전 준비
+
+- Node.js LTS
+- pnpm 10.15.1 (프로젝트의 `packageManager`와 일치)
+
+설치 및 실행
+
+```bash
+pnpm i          # 의존성 설치
+pnpm dev        # 개발 서버 http://localhost:12345 (HMR + React Refresh)
+pnpm build      # 프로덕션 번들(dist)
+pnpm preview    # dist 정적 서빙(간단한 미리보기)
+```
+
+## 개발 노트
 
 - [기초적인 Webpack 세팅 후 간단한 JavaScript 스크립트 빌드해보기](https://github.com/jong-k/webpack-age/tree/main/notes/ch1.md)
 - [TypeScript 프로젝트 번들링하기 (SWC 사용)](https://github.com/jong-k/webpack-age/tree/main/notes/ch2.md)
