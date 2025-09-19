@@ -50,26 +50,31 @@
 
 - 출발/도착 날짜를 입력하면 가상의 항공권을 생성합니다.
 - 더미 데이터: 개발 환경에서는 `@faker-js/faker`로 항공사/공항/좌석/시간/승객명을 실시간 생성합니다.
-  - 프로덕션 환경에서는 `TICKET_PLACEHOLDER` 문자열 더미 데이터를 사용합니다. (무거운 `@faker-js/faker`라이브러리를 번들에 포함하지 않기 위해)
+  - 프로덕션 환경에서는 미리 선언해둔 문자열 더미 데이터를 사용합니다. (무거운 `@faker-js/faker` 라이브러리를 번들에 포함하지 않기 위해)
 - 반응형 디자인 적용
 
 ## Webpack 구현 내용
 
-- 엔트리/출력
-  - 엔트리: `src/main.tsx`
-  - 출력: 개발 `assets/[name].js`, 프로덕션 `assets/[name].[contenthash].js`
+- 엔트리 파일: `src/main.tsx`
+  - 이 파일을 기준으로 번들링
+- 번들 아웃풋
+  - 개발: `assets/[name].js`
+  - 프로덕션: `assets/[name].[contenthash].js`
 - 로더/플러그인
-  - JS/TS: `swc-loader`로 React 자동 런타임, Dev는 Refresh 활성화
-  - CSS: Dev `style-loader + css-loader(importLoaders=1) + postcss-loader` / Prod `mini-css-extract-plugin`
-  - 에셋: 폰트/이미지 `asset/resource` 처리, 파비콘 경로(`public/favicons`)는 이미지 처리에서 제외
-  - HTML: `HtmlWebpackPlugin`으로 `public/index.html` 템플릿 + 파비콘 주입
+  - JS/TS: SWC(`swc-loader`)로 트랜스파일링 및 개발 환경에서 React Refresh 활성화
+  - CSS
+    - 개발: `style-loader + css-loader + postcss-loader (Tailwind CSS 지원)`
+    - 프로덕션: `mini-css-extract-plugin`
+  - 정적 애셋
+    - 폰트/이미지: `asset/resource` 처리
+    - 파비콘: /favicons로 바로 접근할 수 있어야 하므로 최적화에서 제외
+  - HTML: `HtmlWebpackPlugin`으로 `public/index.html` 템플릿 활용 및 파비콘 주입
 - 개발 환경(`webpack.dev.js`)
-  - `devtool: eval-cheap-module-source-map`
-  - DevServer: `static.directory = public/`, `port = 12345`, `open = true`, `hot = true`, `historyApiFallback = true`
+  - `devtool: eval-cheap-module-source-map` (소스 맵)
+  - DevServer: HMR 적용
   - React Refresh: `@pmmmwh/react-refresh-webpack-plugin`
 - 프로덕션 환경(`webpack.prod.js`)
   - `devtool: nosources-source-map`(소스 미포함 맵)
-  - 코드 스플리팅: `splitChunks` + `runtimeChunk: single` + `moduleIds: deterministic`
   - 최적화: 기본 Terser 유지 + `CssMinimizerPlugin`
 
 ## 빠른 시작
@@ -102,8 +107,8 @@ pnpm preview    # dist 정적 서빙(간단한 미리보기)
 
 package.json 내부의 pnpm.onlyBuiltDependencies 설명
 
-- @swc/core의 자체 스크립트 실행이 보안을 이유로 pnpm에 의해 막혀있음
-- SWC가 제대로 수행되도록 pnpm.onlyBuiltDependencies 에서 native binary를 다운로드하게 허가
+- @swc/core의 자체 스크립트 실행이 보안상의 이유로 pnpm에 의해 막혀있음
+- SWC가 제대로 수행되도록 pnpm.onlyBuiltDependencies에서 native binary 다운로드를 허용
 
 ## 참고
 
