@@ -22,3 +22,4 @@ package.json 내부의 pnpm.onlyBuiltDependencies 설명
 ## 참고
 
 - [Webpack 공식 문서](https://webpack.js.org/)
+- [Bundling Fundamentals](https://frontend-fundamentals.com/bundling/)
