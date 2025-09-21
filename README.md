@@ -11,6 +11,7 @@
 - [CSS, 정적 파일(폰트, 아이콘, 이미지)를 번들에 포함하기](https://github.com/jong-k/webpack-age/tree/main/notes/ch5.md)
 - [HMR(Hot Module Replacement) 적용하기](https://github.com/jong-k/webpack-age/tree/main/notes/ch6.md)
 - [번들 최적화 및 번들 서빙 기능(preview) 추가](https://github.com/jong-k/webpack-age/tree/main/notes/ch7.md)
+- [번들 분석](https://github.com/jong-k/webpack-age/tree/main/notes/ch8.md)
 
 ## 기타
 
