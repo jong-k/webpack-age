@@ -2,6 +2,7 @@ const { merge } = require("webpack-merge");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const common = require("./webpack.common");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 module.exports = merge(common, {
   devtool: "nosources-source-map", // 맵 배포 + 소스 미포함
@@ -30,6 +31,10 @@ module.exports = merge(common, {
     new MiniCssExtractPlugin({
       filename: "assets/[name].[contenthash].css",
       chunkFilename: "assets/[name].[contenthash].css",
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: "server",
+      openAnalyzer: true,
     }),
   ],
   module: {
