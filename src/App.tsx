@@ -1,20 +1,17 @@
-import fieldImg from "./assets/images/field.jpg";
-import TicketContainer from "./features/ticket/TicketContainer";
+import { Link } from "react-router";
 
 export default function App() {
   return (
-    <div className="w-full overflow-x-hidden">
-      <div
-        className="min-h-dvh w-full min-w-xs"
-        style={{
-          backgroundImage: `url(${fieldImg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "top",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        <TicketContainer />
-      </div>
+    <div>
+      <h2>Webpack 실험실</h2>
+      <ul>
+        <li>
+          <Link to="/ticket">티켓 생성</Link>
+        </li>
+        <li>
+          <Link to="/check">captcha 테스트</Link>
+        </li>
+      </ul>
     </div>
   );
 }
