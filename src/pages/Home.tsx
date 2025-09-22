@@ -1,10 +1,9 @@
 import { Link } from "react-router";
 
-export default function App() {
+export default function Home() {
   return (
     <div>
-      <h2>Webpack 실험실</h2>
-      <ul>
+      <ul className="space-y-5 text-xl font-semibold">
         <li>
           <Link to="/ticket">티켓 생성</Link>
         </li>
