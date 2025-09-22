@@ -1,5 +1,6 @@
-import fieldImg from "../assets/images/field.jpg";
-import TicketContainer from "../features/ticket/TicketContainer";
+import fieldImg from "./assets/images/field.jpg";
+
+// import TicketContainer from "./features/ticket/TicketContainer";
 
 export default function Ticket() {
   return (
@@ -13,7 +14,8 @@ export default function Ticket() {
           backgroundRepeat: "no-repeat",
         }}
       >
-        <TicketContainer />
+        <div className="cf-turnstile" data-sitekey="0x4AAAAAAB2igh-1uc7G0a6x"></div>
+        {/* <TicketContainer /> */}
       </div>
     </div>
   );
