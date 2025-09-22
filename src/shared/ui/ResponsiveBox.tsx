@@ -1,4 +1,4 @@
-import { cn } from "../lib/style";
+import { cn } from "../lib";
 
 interface ResponsiveBoxProps {
   children: React.ReactNode;
