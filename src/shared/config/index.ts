@@ -1,6 +1,7 @@
 export const ROUTES = {
   HOME: "/",
   CHECK: "/check",
+  TICKET: "/ticket",
 } as const;
 
 export const TURNSTILE_SITEKEY = {

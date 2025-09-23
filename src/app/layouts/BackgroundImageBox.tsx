@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import fieldImage from "../../assets/images/field.jpg";
 import robotImage from "../../assets/images/robot.jpg";
+import { ROUTES } from "../../shared/config";
 
 interface BackgroundImageBoxProps {
   children: React.ReactNode;
@@ -12,8 +13,7 @@ export function BackgroundImageBox({ children }: BackgroundImageBoxProps) {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    if (!pathname) return;
-    if (pathname === "/ticket") setBackgroundImageSrc(fieldImage);
+    if (pathname.startsWith(ROUTES.TICKET)) setBackgroundImageSrc(fieldImage);
     else setBackgroundImageSrc(robotImage);
   }, [pathname]);
 
