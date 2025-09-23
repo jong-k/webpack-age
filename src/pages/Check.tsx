@@ -1,7 +1,7 @@
 import { Turnstile } from "@marsidev/react-turnstile";
-import { TURNSTILE_SITEKEY } from "../shared/config";
+import { getTurnstileSiteKey } from "../shared/lib";
 
-const siteKey = process.env.NODE_ENV === "production" ? TURNSTILE_SITEKEY.prod : TURNSTILE_SITEKEY.dev;
+const siteKey = getTurnstileSiteKey();
 
 export default function Check() {
   return (
