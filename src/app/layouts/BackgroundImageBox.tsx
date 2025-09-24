@@ -12,17 +12,17 @@ export function BackgroundImageBox({ children }: BackgroundImageBoxProps) {
   const [backgroundImageSrc, setBackgroundImageSrc] = useState<string>(robotImage);
   const { pathname } = useLocation();
 
-  useEffect(() => {
-    if (pathname.startsWith(ROUTES.TICKET)) setBackgroundImageSrc(fieldImage);
-    else setBackgroundImageSrc(robotImage);
-  }, [pathname]);
+  // useEffect(() => {
+  //   if (pathname.startsWith(ROUTES.TICKET)) setBackgroundImageSrc(fieldImage);
+  //   else setBackgroundImageSrc(robotImage);
+  // }, [pathname]);
 
   return (
     <div className="w-full overflow-x-hidden">
       <div
         className="min-h-dvh w-full min-w-xs"
         style={{
-          backgroundImage: `url(${backgroundImageSrc})`,
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.5)), url(${backgroundImageSrc})`,
           backgroundSize: "cover",
           backgroundPosition: "top",
           backgroundRepeat: "no-repeat",
