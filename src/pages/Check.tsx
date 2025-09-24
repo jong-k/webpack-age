@@ -1,12 +1,5 @@
-import { Turnstile } from "@marsidev/react-turnstile";
-import { getTurnstileSiteKey } from "../shared/lib";
-
-const siteKey = getTurnstileSiteKey();
+import TurnstileContainer from "../features/check/TurnstileContainer";
 
 export default function Check() {
-  return (
-    <div>
-      <Turnstile siteKey={siteKey} />
-    </div>
-  );
+  return <TurnstileContainer />;
 }
