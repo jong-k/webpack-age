@@ -1,3 +1,5 @@
+import { TurnstileContainer } from "../widgets/Gateway/ui";
+
 export default function Turnstile() {
-  return <div>turnstile page</div>;
+  return <TurnstileContainer />;
 }
