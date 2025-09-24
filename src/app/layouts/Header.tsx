@@ -5,7 +5,7 @@ export default function Header() {
   return (
     <header className="w-full bg-white py-4 text-xl font-semibold shadow-sm">
       <ResponsiveBox>
-        <Link to="/">웹팩 이지</Link>
+        <Link to="/">Bot Shield</Link>
       </ResponsiveBox>
     </header>
   );
