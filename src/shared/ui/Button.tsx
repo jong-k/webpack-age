@@ -2,11 +2,13 @@ import { cn } from "../lib";
 
 interface ButtonProps {
   title: string;
+  isPending: boolean;
+  pendingTitle?: string;
   onClick?: () => void;
   className?: string;
 }
 
-export function Button({ title, onClick, className }: ButtonProps) {
+export function Button({ title, isPending, pendingTitle = "확인중...", onClick, className }: ButtonProps) {
   return (
     <button
       className={cn(
@@ -15,7 +17,7 @@ export function Button({ title, onClick, className }: ButtonProps) {
       )}
       onClick={onClick}
     >
-      {title}
+      {isPending ? pendingTitle : title}
     </button>
   );
 }

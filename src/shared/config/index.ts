@@ -15,4 +15,6 @@ export const RECAPTCHA_SITEKEY = {
   prod: "6LdGetgrAAAAAKBIR5oIEJQa82TNgrSkP9GfkfPy",
 };
 
+export const RECAPTCHA_TOKEN_KEY = "recaptcha-token";
+
 export const DEFAULT_BOT_PERCENT = 0.5;
