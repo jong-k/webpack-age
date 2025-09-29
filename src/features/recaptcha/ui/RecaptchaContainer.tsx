@@ -22,10 +22,16 @@ export function RecaptchaContainer() {
 
   return (
     <div>
-      <h2>Google reCAPTCHA 테스트</h2>
-      {!isPending && recaptchaVerified !== "UNKNOWN" && (
-        <div>{recaptchaVerified === "HUMAN" ? "사람입니다" : "사람이 아닙니다"}</div>
-      )}
+      <h2 className="text-2xl font-semibold">Google reCAPTCHA 테스트</h2>
+      <h3 className="mt-2 text-xl">아래 버튼을 클릭하여 테스트를 시작하세요</h3>
+      <div className="py-6 text-xl">
+        {!isPending && recaptchaVerified !== "UNKNOWN" ? (
+          <div className="h-8">{recaptchaVerified === "HUMAN" ? "사람입니다 🧑" : "사람이 아닙니다 🤖"}</div>
+        ) : (
+          <div className="h-8"></div>
+        )}
+      </div>
+
       <Button onClick={handleRecaptchaVerify} title="사람인지 확인" isPending={isPending} />
     </div>
   );
