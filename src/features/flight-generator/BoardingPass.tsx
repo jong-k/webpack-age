@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react";
-import { loadTicketData } from "./lib/ticketData";
-import { TICKET_PLACEHOLDER } from "./lib/ticketData";
+import { loadFlightData } from "./lib/flightData";
+import { FLIGHT_PLACEHOLDER } from "./lib/flightData";
 import barcodeImg from "../../assets/images/barcode.png";
-import type { TicketDate, TicketRuntimeData } from "../../entities/ticket/model";
+import type { FlightDate, FlightRuntimeData } from "../../entities/flight/model";
 
 interface BoardingPassProps {
-  ticketDate: TicketDate;
+  fligtDate: FlightDate;
 }
 
-const PROD_PLACEHOLDER = process.env.NODE_ENV === "production" ? TICKET_PLACEHOLDER : null;
+const PROD_PLACEHOLDER = process.env.NODE_ENV === "production" ? FLIGHT_PLACEHOLDER : null;
 
-export default function BoardingPass({ ticketDate }: BoardingPassProps) {
-  const [ticketData, setTicketData] = useState<TicketRuntimeData | null>(PROD_PLACEHOLDER);
-  const departureDate = ticketDate.departure?.toDateString();
+export default function BoardingPass({ fligtDate }: BoardingPassProps) {
+  const [ticketData, setTicketData] = useState<FlightRuntimeData | null>(PROD_PLACEHOLDER);
+  const departureDate = fligtDate.departure?.toDateString();
 
   useEffect(() => {
     if (process.env.NODE_ENV === "production") return;
     let active = true;
-    loadTicketData().then(d => {
+    loadFlightData().then(d => {
       if (active) setTicketData(d);
     });
 

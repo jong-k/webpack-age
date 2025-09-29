@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Turnstile } from "@marsidev/react-turnstile";
-import TicketContainer from "../features/ticket/TicketContainer";
+import FlightContainer from "../features/flight-generator/FlightContainer";
 import { TURNSTILE_SITEKEY } from "../shared/config";
 import { sleep } from "../shared/lib";
 
 const siteKey = process.env.NODE_ENV === "development" ? TURNSTILE_SITEKEY.dev : TURNSTILE_SITEKEY.prod;
 
-export default function Ticket() {
+export default function Flight() {
   const [turnstilePassed, setTurnstilePassed] = useState(false);
 
   const handleSuccess = async () => {
@@ -17,7 +17,7 @@ export default function Ticket() {
   return (
     <div>
       {!turnstilePassed && <Turnstile siteKey={siteKey} onSuccess={handleSuccess} />}
-      {turnstilePassed && <TicketContainer />}
+      {turnstilePassed && <FlightContainer />}
     </div>
   );
 }

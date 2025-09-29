@@ -1,9 +1,9 @@
-export interface TicketDate {
+export interface FlightDate {
   departure: Date | null;
   arrival: Date | null;
 }
 
-export interface TicketRuntimeData {
+export interface FlightRuntimeData {
   airlineName: string;
   flightNumber: string;
   departureAirportName: string;
