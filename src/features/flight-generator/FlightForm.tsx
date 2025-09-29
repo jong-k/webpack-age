@@ -1,12 +1,12 @@
 import { useRef } from "react";
-import type { TicketDate } from "../../entities/ticket/model";
+import type { FlightDate } from "../../entities/flight/model";
 
-interface TicketFormProps {
+interface FlightFormProps {
   openModal: () => void;
-  ticketDateSetter: (date: TicketDate) => void;
+  flightDateSetter: (date: FlightDate) => void;
 }
 
-export default function TicketForm({ openModal, ticketDateSetter }: TicketFormProps) {
+export default function FlightForm({ openModal, flightDateSetter }: FlightFormProps) {
   const departureDateRef = useRef<HTMLInputElement | null>(null);
   const arrivalDateRef = useRef<HTMLInputElement | null>(null);
 
@@ -23,7 +23,7 @@ export default function TicketForm({ openModal, ticketDateSetter }: TicketFormPr
       return;
     }
 
-    ticketDateSetter({
+    flightDateSetter({
       departure: departureDate,
       arrival: arrivalDate,
     });

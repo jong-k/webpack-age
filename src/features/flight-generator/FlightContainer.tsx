@@ -1,14 +1,14 @@
 import { useState } from "react";
-import TicketForm from "./TicketForm";
-import TicketModal from "./TicketModal";
-import type { TicketDate } from "../../entities/ticket/model";
+import FlightForm from "./FlightForm";
+import FlightModal from "./FlightModal";
+import type { FlightDate } from "../../entities/flight/model";
 
-export default function TicketContainer() {
-  const [ticketDate, setTicketDate] = useState<TicketDate>({
+export default function FlightContainer() {
+  const [flightDate, setFlightDate] = useState<FlightDate>({
     departure: null,
     arrival: null,
   });
-  const ticketDateSetter = (date: TicketDate) => setTicketDate(date);
+  const flightDateSetter = (date: FlightDate) => setFlightDate(date);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
@@ -23,9 +23,9 @@ export default function TicketContainer() {
       }}
     >
       <div className="m-4 w-full max-w-xl min-w-xs rounded-lg bg-white/50 p-8 shadow-lg md:m-8">
-        <TicketForm openModal={openModal} ticketDateSetter={ticketDateSetter} />
+        <FlightForm openModal={openModal} flightDateSetter={flightDateSetter} />
       </div>
-      <TicketModal isOpen={isModalOpen} closeModal={closeModal} ticketDate={ticketDate} />
+      <FlightModal isOpen={isModalOpen} closeModal={closeModal} fligtDate={flightDate} />
     </div>
   );
 }

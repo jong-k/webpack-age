@@ -1,6 +1,6 @@
-import type { TicketRuntimeData } from "../../../entities/ticket/model";
+import type { FlightRuntimeData } from "../../../entities/flight/model";
 
-export const TICKET_PLACEHOLDER: TicketRuntimeData = {
+export const FLIGHT_PLACEHOLDER: FlightRuntimeData = {
   airlineName: "ACME AIR",
   flightNumber: "AC1234",
   departureAirportName: "Seoul (ICN)",
@@ -12,7 +12,7 @@ export const TICKET_PLACEHOLDER: TicketRuntimeData = {
   passenger: "John Doe",
 };
 
-export async function loadTicketData(): Promise<TicketRuntimeData> {
+export async function loadFlightData(): Promise<FlightRuntimeData> {
   if (process.env.NODE_ENV !== "production") {
     const { faker } = await import("@faker-js/faker");
     const airline = faker.airline.airline();
@@ -39,5 +39,5 @@ export async function loadTicketData(): Promise<TicketRuntimeData> {
     };
   }
 
-  return TICKET_PLACEHOLDER;
+  return FLIGHT_PLACEHOLDER;
 }
