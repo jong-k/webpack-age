@@ -11,6 +11,9 @@ interface ButtonProps {
 export function Button({ title, isPending, pendingTitle = "확인중...", onClick, className }: ButtonProps) {
   return (
     <button
+      type="button"
+      disabled={isPending}
+      aria-busy={isPending}
       className={cn(
         "cursor-pointer rounded-lg bg-blue-500 px-4 py-2 font-semibold text-white shadow-lg hover:bg-blue-400",
         className
