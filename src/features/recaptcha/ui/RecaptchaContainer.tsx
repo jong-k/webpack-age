@@ -14,10 +14,14 @@ export function RecaptchaContainer() {
       return;
     }
     setIsPending(true);
-
-    const token = await executeRecaptcha("testAction");
-    saveRecaptchaToken(token);
-    setIsPending(false);
+    try {
+      const token = await executeRecaptcha("testAction");
+      saveRecaptchaToken(token);
+    } catch (err) {
+      console.error("reCAPTCHA 실행 실패", err);
+    } finally {
+      setIsPending(false);
+    }
   }, [executeRecaptcha]);
 
   return (
