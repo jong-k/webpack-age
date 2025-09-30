@@ -1,4 +1,6 @@
 const { merge } = require("webpack-merge");
+const dotenv = require("dotenv");
+dotenv.config();
 const common = require("./webpack.common");
 const { PUBLIC } = require("./path");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
