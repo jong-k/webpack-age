@@ -9,6 +9,8 @@ export const END_POINTS = {
   recaptcha: "https://recaptchaenterprise.googleapis.com/v1/projects/webpack-age/assessments?key=",
 };
 
+export const RECAPTCHA_API_KEY = process.env.PUBLIC_GOOGLE_CLOUD_API_KEY;
+
 export const TURNSTILE_SITEKEY = {
   dev: "1x00000000000000000000AA",
   prod: "0x4AAAAAAB2igh-1uc7G0a6x",
