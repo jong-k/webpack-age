@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ROOT, SRC, DIST, PUBLIC } = require("./path");
+const { DefinePlugin } = require("webpack");
 
 module.exports = {
   context: ROOT, // 설정파일이 ./webpack/에 있어도 기준을 프로젝트 루트 경로로 고정
@@ -32,6 +33,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(PUBLIC, "index.html"),
       favicon: path.join(PUBLIC, "favicons/favicon-32x32.png"),
+    }),
+    new DefinePlugin({
+      "process.env.PUBLIC_GOOGLE_CLOUD_API_KEY": JSON.stringify(process.env.PUBLIC_GOOGLE_CLOUD_API_KEY || ""),
     }),
   ],
 };
