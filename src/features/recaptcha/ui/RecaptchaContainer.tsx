@@ -1,7 +1,11 @@
 import { useCallback, useState } from "react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { END_POINTS, RECAPTCHA_ACTION } from "../../../shared/config";
+import { getRecaptchaSiteKey } from "../../../shared/lib";
 import { Button } from "../../../shared/ui";
 import { useRecaptcha } from "../model";
+
+const siteKey = getRecaptchaSiteKey();
 
 export function RecaptchaContainer() {
   const [isPending, setIsPending] = useState(false);
@@ -15,8 +19,33 @@ export function RecaptchaContainer() {
     }
     setIsPending(true);
     try {
-      const token = await executeRecaptcha("testAction");
-      saveRecaptchaToken(token);
+      const token = await executeRecaptcha(RECAPTCHA_ACTION);
+      const res = await fetch(`${END_POINTS.recaptcha}${siteKey}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          event: {
+            token,
+            expectedAction: RECAPTCHA_ACTION,
+            siteKey,
+          },
+        }),
+      });
+      console.log(res);
+
+      if (!res.ok) {
+        throw new Error(`reCAPTCHA verify request failed: ${res.status}`);
+      }
+
+      const data = await res.json();
+      const isValid = Boolean(data?.tokenProperties?.valid);
+      const actionMatches = data?.tokenProperties?.action === RECAPTCHA_ACTION;
+
+      if (isValid && actionMatches) {
+        saveRecaptchaToken(token);
+      } else {
+        saveRecaptchaToken("");
+      }
     } catch (err) {
       console.error("reCAPTCHA 실행 실패", err);
     } finally {
