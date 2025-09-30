@@ -10,6 +10,7 @@ env:
   S3_BUCKET: webpack-age
   CF_DISTRIBUTION_ID: E39KX569NC69PX
   ROLE_TO_ASSUME: arn:aws:iam::305919526069:role/github-cicd
+  PUBLIC_GOOGLE_CLOUD_API_KEY: ${{ secrets.PUBLIC_GOOGLE_CLOUD_API_KEY }}
 
 concurrency:
   group: deploy-${{ github.ref }}
