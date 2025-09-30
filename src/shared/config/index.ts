@@ -6,10 +6,8 @@ export const ROUTES = {
 } as const;
 
 export const END_POINTS = {
-  recaptcha: "https://recaptchaenterprise.googleapis.com/v1/projects/webpack-age/assessments?key=",
+  recaptcha: `https://recaptchaenterprise.googleapis.com/v1/projects/webpack-age/assessments?key=${process.env.PUBLIC_GOOGLE_CLOUD_API_KEY}`,
 };
-
-export const RECAPTCHA_API_KEY = process.env.PUBLIC_GOOGLE_CLOUD_API_KEY;
 
 export const TURNSTILE_SITEKEY = {
   dev: "1x00000000000000000000AA",
