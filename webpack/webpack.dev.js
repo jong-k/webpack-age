@@ -2,8 +2,9 @@ const dotenv = require("dotenv");
 dotenv.config();
 const { merge } = require("webpack-merge");
 const fs = require("fs");
+const path = require("path");
 const common = require("./webpack.common");
-const { PUBLIC } = require("./path");
+const { PUBLIC, ROOT } = require("./path");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 const envPath = path.join(ROOT, ".env");
