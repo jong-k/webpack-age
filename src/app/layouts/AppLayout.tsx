@@ -13,7 +13,7 @@ export default function AppLayout() {
     <BackgroundImageBox isBotPercent={opacity}>
       {/* TODO: 부모 컴포넌트 리렌더링으로부터 자유로워지기 위해 memoization 필요 */}
       <Header />
-      <ResponsiveBox className="py-4">
+      <ResponsiveBox className="flex-1 py-4">
         <Suspense
           fallback={
             <div
