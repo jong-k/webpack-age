@@ -1,13 +1,7 @@
 const path = require("path");
-const fs = require("fs");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { ROOT, SRC, DIST, PUBLIC } = require("./path");
 const { DefinePlugin } = require("webpack");
-
-const envPath = path.join(ROOT, ".env");
-if (!fs.existsSync(envPath)) {
-  throw new Error("Missing required .env file at project root: ".concat(envPath));
-}
 
 module.exports = {
   context: ROOT, // 설정파일이 ./webpack/에 있어도 기준을 프로젝트 루트 경로로 고정
