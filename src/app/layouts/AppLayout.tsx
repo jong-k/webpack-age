@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { Outlet } from "react-router";
 import { BackgroundImageBox } from "./BackgroundImageBox";
+import Footer from "./Footer";
 import Header from "./Header";
 import { useOpacity } from "../../features/display-robot/model";
 import { ResponsiveBox } from "../../shared/ui";
@@ -29,6 +30,7 @@ export default function AppLayout() {
           <Outlet />
         </Suspense>
       </ResponsiveBox>
+      <Footer />
     </BackgroundImageBox>
   );
 }
