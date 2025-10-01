@@ -20,7 +20,7 @@ export function RecaptchaContainer() {
     setIsPending(true);
     try {
       const token = await executeRecaptcha(RECAPTCHA_ACTION);
-      const res = await fetch(`${END_POINTS.recaptcha}${siteKey}`, {
+      const res = await fetch(`${END_POINTS.recaptcha}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -31,13 +31,14 @@ export function RecaptchaContainer() {
           },
         }),
       });
-      console.log(res);
 
       if (!res.ok) {
-        throw new Error(`reCAPTCHA verify request failed: ${res.status}`);
+        const details = await res.text().catch(() => "");
+        throw new Error(`reCAPTCHA verify request failed: ${res.status} ${details}`);
       }
 
       const data = await res.json();
+      console.log("🚀 ~ RecaptchaContainer ~ data:", data);
       const isValid = Boolean(data?.tokenProperties?.valid);
       const actionMatches = data?.tokenProperties?.action === RECAPTCHA_ACTION;
 
