@@ -21,7 +21,7 @@ export const useRecaptcha = () => {
 
   useEffect(() => {
     const score = sessionStorage.getItem(RECAPTCHA_SCORE_KEY);
-    if (score !== null) setRecpatchaScore(JSON.parse(score));
+    if (score !== null) setRecpatchaScore(Number(score));
   }, []);
 
   const runRecaptcha = useCallback(async () => {
