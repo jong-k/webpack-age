@@ -16,7 +16,7 @@ export function RecaptchaContainer() {
               <p>{recaptchaTokenInfo.invalidReason}</p>
             </div>
           ) : (
-            <div className="h-10">{recaptchaScore && <p>사람일 확률: {recaptchaScore * 100}%</p>}</div>
+            <div className="h-10">{recaptchaScore !== null && <p>사람일 확률: {recaptchaScore * 100}%</p>}</div>
           )
         ) : recaptchaScore !== null ? (
           <div className="h-10">
