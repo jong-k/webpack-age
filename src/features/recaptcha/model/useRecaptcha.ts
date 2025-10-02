@@ -44,7 +44,7 @@ export const useRecaptcha = () => {
         }),
       });
       const { tokenProperties, riskAnalysis } = await res.json();
-      const isValidToken = tokenProperties.valid as boolean;
+      const isValidToken = !!tokenProperties.valid;
       setTokenInfo({
         valid: isValidToken,
         invalidReason: (tokenProperties.invalidReason || "") as string,
