@@ -18,9 +18,7 @@ export const RECAPTCHA_SITEKEY = {
   dev: "6LcIedgrAAAAAOSnuJ4a4LiRxheIfrccuhmE1M-2",
   prod: "6LdGetgrAAAAAKBIR5oIEJQa82TNgrSkP9GfkfPy",
 };
-
-export const RECAPTCHA_TOKEN_KEY = "recaptcha-token";
-
+export const RECAPTCHA_SCORE_KEY = "recaptcha-score";
 export const RECAPTCHA_ACTION = "WEBPACK_AGE";
 
 export const DEFAULT_BOT_PERCENT = 0.5;
