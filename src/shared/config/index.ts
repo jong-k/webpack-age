@@ -19,7 +19,7 @@ export const RECAPTCHA_SITEKEY = {
   prod: "6LdGetgrAAAAAKBIR5oIEJQa82TNgrSkP9GfkfPy",
 };
 
-export const RECAPTCHA_TOKEN_KEY = "recaptcha-token";
+export const RECAPTCHA_STATUS_KEY = "recaptcha-status";
 
 export const RECAPTCHA_ACTION = "WEBPACK_AGE";
 
