@@ -23,7 +23,7 @@ export function BackgroundImageBox({ children, isBotPercent }: BackgroundImageBo
   return (
     <div className="w-full overflow-x-hidden">
       <div
-        className="min-h-dvh w-full min-w-xs"
+        className="flex min-h-dvh w-full min-w-xs flex-col"
         style={{
           backgroundImage: `linear-gradient(rgba(255,255,255,${opacity})), url(${backgroundImageSrc})`,
           backgroundSize: "cover",
