@@ -1,7 +1,6 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import { RECAPTCHA_ACTION } from "../../../shared/config";
-import { END_POINTS } from "../../../shared/config";
+import { END_POINTS, RECAPTCHA_ACTION, RECAPTCHA_DEFAULT_SCORE, RECAPTCHA_SCORE_KEY } from "../../../shared/config";
 import { getRecaptchaSiteKey } from "../../../shared/lib";
 
 interface RecaptchaTokenInfo {
@@ -17,12 +16,17 @@ export const useRecaptcha = () => {
     valid: undefined,
     invalidReason: "",
   });
-  const [isHumanPercent, setIsHumanPercent] = useState<number>(0.5);
+  const [recaptchaScore, setRecpatchaScore] = useState<number>(RECAPTCHA_DEFAULT_SCORE);
   const { executeRecaptcha } = useGoogleReCaptcha();
+
+  useEffect(() => {
+    const score = sessionStorage.getItem(RECAPTCHA_SCORE_KEY);
+    if (score !== null) setRecpatchaScore(JSON.parse(score));
+  }, []);
 
   const runRecaptcha = useCallback(async () => {
     if (!executeRecaptcha) {
-      console.log("Execute recaptcha not yet available");
+      console.error("reCAPTCHA 로딩 실패");
       return;
     }
     setIsPending(true);
@@ -45,7 +49,10 @@ export const useRecaptcha = () => {
         invalidReason: (tokenProperties.invalidReason || "") as string,
       });
       const score = riskAnalysis.score as number;
-      if (score > 0) setIsHumanPercent(score);
+      if (score > 0) {
+        setRecpatchaScore(score);
+        sessionStorage.setItem(RECAPTCHA_SCORE_KEY, String(score));
+      }
     } catch (err) {
       console.error("reCAPTCHA 실행 실패", err);
     } finally {
@@ -56,7 +63,7 @@ export const useRecaptcha = () => {
   return {
     recaptchaTokenInfo: tokenInfo,
     isPendingRecaptcha: isPending,
-    isHumanPercentByRecaptcha: isHumanPercent,
+    recaptchaScore,
     runRecaptcha,
   };
 };

@@ -1,8 +1,9 @@
+import { RECAPTCHA_DEFAULT_SCORE } from "../../../shared/config";
 import { Button } from "../../../shared/ui";
 import { useRecaptcha } from "../model";
 
 export function RecaptchaContainer() {
-  const { recaptchaTokenInfo, isPendingRecaptcha, isHumanPercentByRecaptcha, runRecaptcha } = useRecaptcha();
+  const { recaptchaTokenInfo, isPendingRecaptcha, recaptchaScore, runRecaptcha } = useRecaptcha();
 
   return (
     <div>
@@ -17,9 +18,13 @@ export function RecaptchaContainer() {
             </div>
           ) : (
             <div className="h-8">
-              <p>사람일 확률 {isHumanPercentByRecaptcha}</p>
+              <p>사람일 확률: {recaptchaScore * 100}%</p>
             </div>
           )
+        ) : recaptchaScore !== RECAPTCHA_DEFAULT_SCORE ? (
+          <div className="h-8">
+            <p>사람일 확률: {recaptchaScore * 100}%</p>
+          </div>
         ) : (
           <div className="h-8"></div>
         )}
