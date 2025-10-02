@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import { END_POINTS, RECAPTCHA_ACTION, RECAPTCHA_DEFAULT_SCORE, RECAPTCHA_SCORE_KEY } from "../../../shared/config";
+import { END_POINTS, RECAPTCHA_ACTION, RECAPTCHA_SCORE_KEY } from "../../../shared/config";
 import { getRecaptchaSiteKey } from "../../../shared/lib";
 
 interface RecaptchaTokenInfo {
-  valid: boolean | undefined;
+  valid: boolean | null;
   invalidReason: string;
 }
 
@@ -13,10 +13,10 @@ const SITE_KEY = getRecaptchaSiteKey();
 export const useRecaptcha = () => {
   const [isPending, setIsPending] = useState(false);
   const [tokenInfo, setTokenInfo] = useState<RecaptchaTokenInfo>({
-    valid: undefined,
+    valid: null, // token 발행 전 상태
     invalidReason: "",
   });
-  const [recaptchaScore, setRecpatchaScore] = useState<number>(RECAPTCHA_DEFAULT_SCORE);
+  const [recaptchaScore, setRecpatchaScore] = useState<number | null>(null); // null: score 측정 전 상태
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   useEffect(() => {
@@ -44,12 +44,13 @@ export const useRecaptcha = () => {
         }),
       });
       const { tokenProperties, riskAnalysis } = await res.json();
+      const isValidToken = tokenProperties.valid as boolean;
       setTokenInfo({
-        valid: tokenProperties.valid as boolean,
+        valid: isValidToken,
         invalidReason: (tokenProperties.invalidReason || "") as string,
       });
-      const score = riskAnalysis.score as number;
-      if (score > 0) {
+      if (isValidToken) {
+        const score = riskAnalysis.score as number;
         setRecpatchaScore(score);
         sessionStorage.setItem(RECAPTCHA_SCORE_KEY, String(score));
       }

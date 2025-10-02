@@ -20,6 +20,5 @@ export const RECAPTCHA_SITEKEY = {
 };
 export const RECAPTCHA_SCORE_KEY = "recaptcha-score";
 export const RECAPTCHA_ACTION = "WEBPACK_AGE";
-export const RECAPTCHA_DEFAULT_SCORE = 0.5;
 
 export const DEFAULT_BOT_PERCENT = 0.5;
